@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - Zaza A Paris | Bijoux d'Exception</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour la page collections */
+        .collections-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 2rem;
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            color: #7f8c8d;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #ecf0f1;
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .product-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #d4af37;
+            text-align: right;
+            position: relative;
+        }
+
+        .product-price::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #ffd700);
+            transform: translateY(-50%);
+        }
+
+        .error-message {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 1.1rem;
+            padding: 2rem;
+            background: #fdf2f2;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .collections-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .collections-container {
+                padding: 60px 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .product-info {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .collections-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .collections-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Styles pour la mise en page avec filtres */
+        .collections-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .filters-sidebar {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filters-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+
+        .filter-group h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .price-range {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .price-range label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-range input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ecf0f1;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .price-range input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+        }
+
+        .price-range input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+
+        .filter-checkbox input[type="checkbox"] {
+            margin-right: 0.8rem;
+            width: 18px;
+            height: 18px;
+            accent-color: #d4af37;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: white;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus {
+            border-color: #d4af37;
+        }
+
+        .reset-filters-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .reset-filters-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .collections-main {
+            min-height: 600px;
+        }
+
+        .no-products-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .no-products-message h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .no-products-message p {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .quick-add-btn {
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .collections-layout {
+                grid-template-columns: 250px 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .collections-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .filters-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .collections-main {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Flottante -->
+    <nav class="floating-nav">
+        <div class="nav-buttons">
+            <a href="accueil.html" class="nav-btn">Accueil</a>
+            <a href="collections.html" class="nav-btn active">Collections</a>
+            <a href="journal.html" class="nav-btn">Journal</a>
+            <a href="maison.html" class="nav-btn">La Maison</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <span class="search-icon">🔍</span>
+            <div class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="collections" class="hero">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline class="hero-video-bg">
+                <source src="assets/videos/HERO/A REMPLACER/3942586-hd_1920_1080_25fps - Trim.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h2 class="hero-subtitle">Bijoux d'Exception</h2>
+            <h1 class="hero-title">Nos Collections</h1>
+            <p class="hero-description">Découvrez notre sélection de bijoux artisanaux, créés avec passion dans notre atelier parisien</p>
+            <a href="#collections-showcase" class="cta-button">Découvrir nos Créations</a>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-arrow">↓</div>
+            <span>Découvrir</span>
+        </div>
+    </section>
+
+    <!-- Collections Container -->
+    <section id="collections-showcase" class="section artistic-element">
+        <div class="container">
+            <h2 class="section-title shimmer-effect">Nos Créations</h2>
+            <p class="section-subtitle">Découvrez notre collection de bijoux d'exception, créés avec passion dans notre atelier parisien</p>
+            
+            <div class="collections-layout">
+                <!-- Sidebar de filtres -->
+                <div class="filters-sidebar">
+                    <h3 class="filters-title">Filtres</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Prix</h4>
+                        <div class="price-range">
+                            <label for="price-min">Min: <span id="price-min-value">0</span>€</label>
+                            <input type="range" id="price-min" min="0" max="50" value="0" step="1">
+                            <label for="price-max">Max: <span id="price-max-value">50</span>€</label>
+                            <input type="range" id="price-max" min="0" max="50" value="50" step="1">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Matériaux</h4>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="material" value="or"> 
+                            <span class="checkmark"></span>
+                            Or
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="material" value="argent"> 
+                            <span class="checkmark"></span>
+                            Argent
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="material" value="pierres"> 
+                            <span class="checkmark"></span>
+                            Pierres précieuses
+                        </label>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Collections</h4>
+                        <select id="collection-filter" class="filter-select">
+                            <option value="">Toutes</option>
+                            <option value="bagues">Bagues</option>
+                            <option value="colliers">Colliers</option>
+                            <option value="bracelets">Bracelets</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="resetFilters()" class="reset-filters-btn">Réinitialiser</button>
+                </div>
+                
+                <!-- Contenu principal -->
+                <div class="collections-main">
+                    <!-- Loader -->
+                    <div id="loader" class="loader">
+                        <div class="loader-spinner"></div>
+                        <p>Chargement de nos créations...</p>
+                    </div>
+            
+                    <!-- Error Message -->
+                    <div id="error-message" class="error-message" style="display: none;">
+                        <p>Désolé, une erreur s'est produite lors du chargement des produits. Veuillez réessayer plus tard.</p>
+                    </div>
+            
+                    <!-- Products Grid -->
+                    <div id="products-grid" class="products-grid" style="display: none;">
+                        <!-- Les produits seront chargés ici via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Amélioré -->
+    <footer class="footer-enhanced">
+        <div class="footer-background">
+            <img src="assets/images/blog/ILLUSTRATION/pexels-diva-33035953.jpg" alt="Zaza A Paris" class="footer-bg-image">
+            <div class="footer-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="footer-content-enhanced">
+                <div class="footer-section-enhanced footer-brand">
+                    <h3 class="footer-logo">Zaza A Paris</h3>
+                    <p class="footer-tagline">L'art de la joaillerie parisienne depuis 1985</p>
+                    <p class="footer-description">Créateur de bijoux d'exception, nous perpétuons l'excellence de la haute joaillerie française avec passion et savoir-faire artisanal.</p>
+                    <div class="footer-certifications">
+                        <span class="certification-badge">Maître Artisan</span>
+                        <span class="certification-badge">Made in Paris</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collections.html#eternite">Collection Éternité</a></li>
+                        <li><a href="collections.html#lumiere">Collection Lumière</a></li>
+                        <li><a href="collections.html#modernite">Collection Modernité</a></li>
+                        <li><a href="collections.html">Toutes nos créations</a></li>
+                        <li><a href="collections.html#nouveautes">Nouveautés</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="contact.html#sur-mesure">Création sur mesure</a></li>
+                        <li><a href="contact.html#consultation">Consultation privée</a></li>
+                        <li><a href="contact.html#reparation">Réparation & entretien</a></li>
+                        <li><a href="contact.html#expertise">Expertise & estimation</a></li>
+                        <li><a href="contact.html#livraison">Livraison sécurisée</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Contact & Boutique</h4>
+                    <div class="contact-info-enhanced">
+                        <p><span class="contact-icon">📍</span> 15 Place Vendôme, 75001 Paris</p>
+                        <p><span class="contact-icon">📞</span> +33 1 42 60 95 23</p>
+                        <p><span class="contact-icon">✉️</span> contact@zazaaparis.fr</p>
+                        <p><span class="contact-icon">🕒</span> Lun-Sam 10h-19h</p>
+                        <p><span class="contact-icon">🚇</span> Métro Opéra, Tuileries</p>
+                    </div>
+                    <div class="social-links-enhanced">
+                        <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                        <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+                        <a href="#" class="social-link" aria-label="Pinterest">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom-enhanced">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2024 Zaza A Paris. Tous droits réservés.</p>
+                        <p class="footer-subtitle">Bijouterie artisanale française</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#mentions-legales">Mentions légales</a>
+                        <a href="#confidentialite">Confidentialité</a>
+                        <a href="#cgv">CGV</a>
+                        <a href="#cookies">Cookies</a>
+                    </div>
+                    <div class="footer-payments">
+                        <span class="payment-text">Paiements sécurisés</span>
+                        <div class="payment-icons">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-icon">🔒</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fonction pour nettoyer le HTML des descriptions
+        function cleanDescription(htmlString) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlString;
+            return tempDiv.textContent || tempDiv.innerText || '';
+        }
+
+        // Fonction pour créer une carte produit
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            const cleanDesc = cleanDescription(product.description);
+            const shortDesc = cleanDesc.length > 120 ? cleanDesc.substring(0, 120) + '...' : cleanDesc;
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                    <div class="product-overlay">
+                        <span>Voir les détails</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.title}</h3>
+                    <p class="product-description">${shortDesc}</p>
+                    <div class="product-price">${product.price}</div>
+                </div>
+            `;
+            
+            // Rendre la carte cliquable
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                window.location.href = `produit.html?id=${product.id}`;
+            });
+            
+            return card;
+        }
+
+        // Fonction pour charger et afficher les produits
+        async function loadProducts() {
+            const loader = document.getElementById('loader');
+            const errorMessage = document.getElementById('error-message');
+            const productsGrid = document.getElementById('products-grid');
+            
+            try {
+                // Simulation d'un délai de chargement pour l'effet
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const response = await fetch('products_for_trae.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.products || !Array.isArray(data.products)) {
+                    throw new Error('Format de données invalide');
+                }
+                
+                // Masquer le loader
+                loader.style.display = 'none';
+                
+                // Afficher la grille
+                productsGrid.style.display = 'grid';
+                
+                // Créer et ajouter les cartes produits
+                data.products.forEach((product, index) => {
+                    const card = createProductCard(product);
+                    
+                    // Animation d'apparition échelonnée
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    productsGrid.appendChild(card);
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+                
+            } catch (error) {
+                console.error('Erreur lors du chargement des produits:', error);
+                
+                // Masquer le loader
+                loader.style.display = 'none';
+                
+                // Afficher le message d'erreur
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // Charger les produits au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Le chargement des produits est maintenant géré par enhanced-features.js
+            // loadProducts(); // Commenté car géré par ZazaEcommerce
+            initializeFilters();
+        });
+
+        // Fonction pour initialiser les filtres (remplacée par enhanced-features.js)
+        function initializeFilters() {
+            // Cette fonction est maintenant gérée par enhanced-features.js
+            console.log('Filtres initialisés par enhanced-features.js');
+        }
+        
+        // Fonction pour appliquer les filtres (compatibilité)
+        function applyFilters() {
+            if (window.zaza) {
+                window.zaza.applyFilters();
+            }
+        }
+        
+        // Fonction pour réinitialiser les filtres (compatibilité)
+        function resetFilters() {
+            if (window.zaza) {
+                window.zaza.resetFilters();
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="cart-enhanced.js"></script>
+    <script src="enhanced-features.js"></script>
+    <script>
+        // Initialisation du panier amélioré
+        document.addEventListener('DOMContentLoaded', function() {
+            window.enhancedCart = new EnhancedShoppingCart();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Collier Conchiglia",
+      "price": "27.2€",
+      "description": "Collier composé d'une chaîne en maille facettée et pendentif en acier inoxydable avec un fermoir T. Bijou fait main dans notre atelier parisien.",
+      "images": ["images/collier1.svg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["élégant", "moderne", "fait-main", "parisien"]
+    },
+    {
+      "id": 2,
+      "title": "Collier Scarabée",
+      "price": "23.8€",
+      "description": "Collier composé d'une chaîne et fermoir T en acier inoxydable et d'un pendentif serti en pierre semi-précieuse. Hypoallergénique.",
+      "images": ["images/collier2.svg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["pierres", "semi-précieuses", "hypoallergénique", "scarabée"]
+    },
+    {
+      "id": 3,
+      "title": "Collier Siempre",
+      "price": "22.4€",
+      "description": "Collier composé d'une chaîne et médaille martelée en acier inoxydable. Bijou fait main dans notre atelier parisien.",
+      "images": ["images/collier3.svg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["martelé", "fait-main", "parisien", "médaille"]
+    },
+    {
+      "id": 4,
+      "title": "Collier Reine",
+      "price": "25.5€",
+      "description": "Collier composé d'une chaîne large et plate en acier inoxydable. Design élégant et moderne.",
+      "images": ["https://static.wixstatic.com/media/1166cc_4ad840402d714a4bab6290dbdfb3116b~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["élégant", "moderne", "large", "plate"]
+    },
+    {
+      "id": 5,
+      "title": "Collier Alba",
+      "price": "27.2€",
+      "description": "Collier/sautoir composé d'une chaîne et médailles en acier inoxydable. Longueur totale: 66 cm.",
+      "images": ["https://static.wixstatic.com/media/1166cc_b72675b58d6f40aeafbd9834eae2e239~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["sautoir", "long", "médailles", "66cm"]
+    },
+    {
+      "id": 6,
+      "title": "Collier Valentina",
+      "price": "27.2€",
+      "description": "Collier composé d'une chaîne et fermoir T en acier inoxydable ainsi qu'un pendentif en acier inoxydable. Hypoallergénique.",
+      "images": ["https://static.wixstatic.com/media/1166cc_04568f30d90f469bace4001768fc7d50~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["hypoallergénique", "pendentif", "fermoir-T"]
+    },
+    {
+      "id": 7,
+      "title": "Collier Isola",
+      "price": "27.2€",
+      "description": "Collier composé d'une chaîne et pendentif en acier inoxydable, perles d'eau douce. Création artisanale.",
+      "images": ["https://static.wixstatic.com/media/1166cc_875d115ffed34e22a2d76e4ed22a617e~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["perles", "eau-douce", "artisanal", "création"]
+    },
+    {
+      "id": 8,
+      "title": "Collier Perla",
+      "price": "23.8€",
+      "description": "Collier composé d'une chaîne et pendentif en acier inoxydable et de perles d'eau douce et en hématite.",
+      "images": ["https://static.wixstatic.com/media/1166cc_57bfc66790c44e4a98e7b9b40284ae28~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["perles", "eau-douce", "hématite", "pendentif"]
+    },
+    {
+      "id": 9,
+      "title": "Collier Elena",
+      "price": "20.4€",
+      "description": "Collier composé d'une chaîne et pendentifs en acier inoxydable et de pierres semi-précieuses. Couleurs: rose pastel, vert, rose.",
+      "images": ["https://static.wixstatic.com/media/1166cc_c8779880b3e4446fa6677a40ebf5a595~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "multicolore",
+      "keywords": ["pierres", "semi-précieuses", "rose", "vert", "pastel"]
+    },
+    {
+      "id": 10,
+      "title": "Collier Madre",
+      "price": "34€",
+      "description": "Collier composé d'une chaîne rectangle, fermoir T et pendentif en acier inoxydable. Pièce signature de la collection.",
+      "images": ["https://static.wixstatic.com/media/1166cc_f55f3d5326d1473d98398923fa3ab10d~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["signature", "rectangle", "fermoir-T", "premium"]
+    },
+    {
+      "id": 11,
+      "title": "Collier Fiore",
+      "price": "27.2€",
+      "description": "Collier composé d'une chaîne en acier inoxydable et d'un pendentif doré à l'or fin 24K avec un mini cabochon écru.",
+      "images": ["https://static.wixstatic.com/media/1166cc_3d7a98fc6c334bf9a50473e2a0609bac~mv2.jpg"],
+      "material": "Or 24K",
+      "collection": "colliers",
+      "color": "or-jaune",
+      "keywords": ["or-fin", "24K", "cabochon", "doré", "écru"]
+    },
+    {
+      "id": 12,
+      "title": "Collier Roma",
+      "price": "27.2€",
+      "description": "Collier composé d'une chaîne en acier inoxydable et d'un pendentif avec un cabochon en nacre. Élégance intemporelle.",
+      "images": ["https://static.wixstatic.com/media/1166cc_adfa7d0efcf941d0a286c7b51521ccbd~mv2.jpg"],
+      "material": "Acier inoxydable",
+      "collection": "colliers",
+      "color": "argent",
+      "keywords": ["nacre", "cabochon", "intemporel", "élégant"]
+    }
+  ]
+}

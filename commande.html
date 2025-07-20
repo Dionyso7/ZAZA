@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finaliser la commande - Zaza A Paris | Bijoux d'Exception</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 2rem 80px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .checkout-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-form h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 120px;
+        }
+
+        .order-summary h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .order-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-item-price {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .order-item-quantity {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .order-totals {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-line.final {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .total-line.final .amount {
+            color: #d4af37;
+        }
+
+        .submit-order {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .submit-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-order:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover,
+        .payment-method.selected {
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .payment-method input {
+            display: none;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #7f8c8d;
+        }
+
+        .empty-cart-message h2 {
+            margin-bottom: 1rem;
+        }
+
+        .back-to-shop {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .back-to-shop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Flottante -->
+    <nav class="floating-nav">
+        <div class="nav-buttons">
+            <a href="accueil.html" class="nav-btn">Accueil</a>
+            <a href="collections.html" class="nav-btn">Collections</a>
+            <a href="journal.html" class="nav-btn">Journal</a>
+            <a href="maison.html" class="nav-btn">La Maison</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <span class="search-icon">🔍</span>
+            <div class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section pour la page commande -->
+    <section class="checkout-hero">
+        <div class="checkout-hero-content">
+            <h1 class="checkout-title">Finaliser votre Commande</h1>
+            <p class="checkout-subtitle">Dernière étape avant de recevoir vos bijoux d'exception</p>
+        </div>
+    </section>
+
+    <div class="checkout-container">
+        <div id="checkout-content">
+            <!-- Le contenu sera généré par JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer Amélioré -->
+    <footer class="footer-enhanced">
+        <div class="footer-background">
+            <img src="assets/images/blog/ILLUSTRATION/pexels-diva-33035953.jpg" alt="Zaza A Paris" class="footer-bg-image">
+            <div class="footer-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="footer-content-enhanced">
+                <div class="footer-section-enhanced footer-brand">
+                    <h3 class="footer-logo">Zaza A Paris</h3>
+                    <p class="footer-tagline">L'art de la joaillerie parisienne depuis 1985</p>
+                    <p class="footer-description">Créateur de bijoux d'exception, nous perpétuons l'excellence de la haute joaillerie française avec passion et savoir-faire artisanal.</p>
+                    <div class="footer-certifications">
+                        <span class="certification-badge">Maître Artisan</span>
+                        <span class="certification-badge">Made in Paris</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collections.html#eternite">Collection Éternité</a></li>
+                        <li><a href="collections.html#lumiere">Collection Lumière</a></li>
+                        <li><a href="collections.html#modernite">Collection Modernité</a></li>
+                        <li><a href="collections.html">Toutes nos créations</a></li>
+                        <li><a href="collections.html#nouveautes">Nouveautés</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="contact.html#sur-mesure">Création sur mesure</a></li>
+                        <li><a href="contact.html#consultation">Consultation privée</a></li>
+                        <li><a href="contact.html#reparation">Réparation & entretien</a></li>
+                        <li><a href="contact.html#expertise">Expertise & estimation</a></li>
+                        <li><a href="contact.html#livraison">Livraison sécurisée</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Contact & Boutique</h4>
+                    <div class="contact-info-enhanced">
+                        <p><span class="contact-icon">📍</span> 15 Place Vendôme, 75001 Paris</p>
+                        <p><span class="contact-icon">📞</span> +33 1 42 60 95 23</p>
+                        <p><span class="contact-icon">✉️</span> contact@zazaaparis.fr</p>
+                        <p><span class="contact-icon">🕒</span> Lun-Sam 10h-19h</p>
+                        <p><span class="contact-icon">🚇</span> Métro Opéra, Tuileries</p>
+                    </div>
+                    <div class="social-links-enhanced">
+                        <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                        <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+                        <a href="#" class="social-link" aria-label="Pinterest">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom-enhanced">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2024 Zaza A Paris. Tous droits réservés.</p>
+                        <p class="footer-subtitle">Bijouterie artisanale française</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#mentions-legales">Mentions légales</a>
+                        <a href="#confidentialite">Confidentialité</a>
+                        <a href="#cgv">CGV</a>
+                        <a href="#cookies">Cookies</a>
+                    </div>
+                    <div class="footer-payments">
+                        <span class="payment-text">Paiements sécurisés</span>
+                        <div class="payment-icons">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-icon">🔒</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cart-enhanced.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.enhancedCart = new EnhancedShoppingCart();
+            renderCheckoutPage();
+        });
+
+        function renderCheckoutPage() {
+            const checkoutContent = document.getElementById('checkout-content');
+            const cartData = window.enhancedCart ? window.enhancedCart.getCartData() : { items: [], total: 0 };
+            
+            if (cartData.items.length === 0) {
+                checkoutContent.innerHTML = `
+                    <div class="empty-cart-message">
+                        <h2>Votre panier est vide</h2>
+                        <p>Découvrez nos magnifiques collections de bijoux</p>
+                        <a href="collections.html" class="back-to-shop">Découvrir nos collections</a>
+                    </div>
+                `;
+                return;
+            }
+
+            checkoutContent.innerHTML = `
+                <div class="checkout-grid">
+                    <div class="checkout-form">
+                        <h2>Informations de livraison</h2>
+                        <form id="checkout-form">
+                            <div class="form-section">
+                                <h3>Coordonnées</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName">Prénom <span class="required">*</span></label>
+                                        <input type="text" id="firstName" name="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Nom <span class="required">*</span></label>
+                                        <input type="text" id="lastName" name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Téléphone <span class="required">*</span></label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Adresse de livraison</h3>
+                                <div class="form-group">
+                                    <label for="address">Adresse <span class="required">*</span></label>
+                                    <input type="text" id="address" name="address" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="city">Ville <span class="required">*</span></label>
+                                        <input type="text" id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="postalCode">Code postal <span class="required">*</span></label>
+                                        <input type="text" id="postalCode" name="postalCode" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Pays <span class="required">*</span></label>
+                                    <select id="country" name="country" required>
+                                        <option value="FR">France</option>
+                                        <option value="BE">Belgique</option>
+                                        <option value="CH">Suisse</option>
+                                        <option value="LU">Luxembourg</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Mode de paiement</h3>
+                                <div class="payment-methods">
+                                    <label class="payment-method">
+                                        <input type="radio" name="payment" value="card" checked>
+                                        <div>💳 Carte bancaire</div>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="payment" value="paypal">
+                                        <div>🅿️ PayPal</div>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="payment" value="transfer">
+                                        <div>🏦 Virement</div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Commentaires</h3>
+                                <div class="form-group">
+                                    <label for="comments">Message (optionnel)</label>
+                                    <textarea id="comments" name="comments" placeholder="Demandes particulières, instructions de livraison..."></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3>Récapitulatif de commande</h3>
+                        <div class="order-items">
+                            ${cartData.items.map(item => {
+                                const itemTotal = item.price * item.quantity;
+                                return `
+                                    <div class="order-item">
+                                        <div class="order-item-image">
+                                            <img src="${item.image}" alt="${item.title}">
+                                        </div>
+                                        <div class="order-item-details">
+                                            <div class="order-item-title">${item.title}</div>
+                                            <div class="order-item-quantity">Quantité: ${item.quantity} × ${window.enhancedCart.formatPrice(item.price)}</div>
+                                            <div class="order-item-price">${window.enhancedCart.formatPrice(itemTotal)}</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        
+                        <div class="order-totals">
+                            <div class="total-line">
+                                <span>Sous-total HT:</span>
+                                <span>${window.enhancedCart.formatPrice(cartData.subtotalHT)}</span>
+                            </div>
+                            <div class="total-line">
+                                <span>TVA (20%):</span>
+                                <span>${window.enhancedCart.formatPrice(cartData.tva)}</span>
+                            </div>
+                            <div class="total-line">
+                                <span>Livraison:</span>
+                                <span>Gratuite</span>
+                            </div>
+                            <div class="total-line final">
+                                <span>Total TTC:</span>
+                                <span class="amount">${window.enhancedCart.formatPrice(cartData.totalTTC)}</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" form="checkout-form" class="submit-order">
+                            Finaliser la commande
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Ajouter les event listeners
+            setupCheckoutEventListeners();
+        }
+
+        function setupCheckoutEventListeners() {
+            // Gestion des méthodes de paiement
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                });
+            });
+
+            // Gestion du formulaire
+            const checkoutForm = document.getElementById('checkout-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    processOrder();
+                });
+            }
+        }
+
+        function processOrder() {
+            const form = document.getElementById('checkout-form');
+            const formData = new FormData(form);
+            const orderData = {
+                customer: {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone')
+                },
+                shipping: {
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    postalCode: formData.get('postalCode'),
+                    country: formData.get('country')
+                },
+                payment: formData.get('payment'),
+                comments: formData.get('comments'),
+                items: cartData.items,
+                total: cartData.totalTTC,
+                orderDate: new Date().toISOString()
+            };
+
+            // Simuler le traitement de la commande
+            const submitBtn = document.querySelector('.submit-order');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Traitement en cours...';
+
+            setTimeout(() => {
+                // Sauvegarder la commande
+                localStorage.setItem('lastOrder', JSON.stringify(orderData));
+                
+                // Vider le panier
+                if (window.enhancedCart) {
+                    window.enhancedCart.clearCart();
+                }
+                
+                // Rediriger vers une page de confirmation
+                alert('Commande confirmée ! Vous allez recevoir un email de confirmation.');
+                window.location.href = 'accueil.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

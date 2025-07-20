@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            margin: 10px;
+            border: 2px solid #ccc;
+        }
+        .error {
+            border-color: red;
+        }
+        .success {
+            border-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de chargement des images</h1>
+    
+    <h2>Image 1 - Collier Conchiglia</h2>
+    <img id="img1" class="test-image" src="https://static.wixstatic.com/media/1166cc_c3b5f5653eb44a34beee659e251c472d~mv2.jpg" alt="Test 1">
+    
+    <h2>Image 2 - Collier Scarabée</h2>
+    <img id="img2" class="test-image" src="https://static.wixstatic.com/media/1166cc_7ee6832dc2ee405aa8c5a45596d4e6a8~mv2.jpg" alt="Test 2">
+    
+    <h2>Image 3 - Collier Siempre</h2>
+    <img id="img3" class="test-image" src="https://static.wixstatic.com/media/1166cc_ac90883f47d74df49a0e91720960b2b1~mv2.jpg" alt="Test 3">
+    
+    <div id="results"></div>
+    
+    <script>
+        const images = document.querySelectorAll('.test-image');
+        const results = document.getElementById('results');
+        
+        images.forEach((img, index) => {
+            img.onload = function() {
+                console.log(`Image ${index + 1} chargée avec succès`);
+                this.classList.add('success');
+                results.innerHTML += `<p style="color: green;">Image ${index + 1}: Chargée avec succès</p>`;
+            };
+            
+            img.onerror = function() {
+                console.error(`Erreur de chargement de l'image ${index + 1}:`, this.src);
+                this.classList.add('error');
+                results.innerHTML += `<p style="color: red;">Image ${index + 1}: Erreur de chargement</p>`;
+            };
+        });
+    </script>
+</body>
+</html>

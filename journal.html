@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal - Zaza A Paris | Actualités & Tendances</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Flottante -->
+    <nav class="floating-nav">
+        <div class="nav-buttons">
+            <a href="accueil.html" class="nav-btn">Accueil</a>
+            <a href="collections.html" class="nav-btn">Collections</a>
+            <a href="journal.html" class="nav-btn active">Journal</a>
+            <a href="maison.html" class="nav-btn">La Maison</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <span class="search-icon">🔍</span>
+            <div class="cart-icon">
+                🛍️
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section avec vidéo -->
+    <section id="hero" class="hero">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="assets/videos/HERO/A REMPLACER/3968072-hd_1920_1080_24fps - Trim.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-subtitle">JOURNAL DE LA MAISON</p>
+                <h1 class="hero-title">L'Art de la Joaillerie Parisienne</h1>
+                <p class="hero-description">Plongez dans l'univers de nos créations et découvrez les secrets de notre savoir-faire</p>
+                <a href="#blog" class="primary-button">DÉCOUVRIR NOS ARTICLES</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>DÉCOUVRIR</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section artistic-element">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Featured Article -->
+                <article class="blog-post featured">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-diva-33035953.jpg" alt="Collection Automne 2024" class="blog-img">
+                        <div class="blog-category">Nouveautés</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h2>Collection Automne 2024 - L'Éclat des Feuilles d'Or</h2>
+                        <p class="blog-excerpt">
+                            Découvrez notre nouvelle collection inspirée des couleurs chatoyantes de l'automne parisien. 
+                            Des pièces uniques qui capturent la magie de cette saison dorée, alliant tradition et modernité 
+                            dans un équilibre parfait.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">15 Octobre 2024</span>
+                            <span class="blog-author">Par Marie Dubois</span>
+                        </div>
+                        <a href="#" class="read-more">Lire l'article complet →</a>
+                    </div>
+                </article>
+
+                <!-- Regular Articles -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-didsss-3705651.jpg" alt="Tendances Hiver" class="blog-img">
+                        <div class="blog-category">Tendances</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Tendances Hiver - Le Retour des Pierres Précieuses</h3>
+                        <p class="blog-excerpt">
+                            Cette saison, les pierres précieuses colorées font leur grand retour. Émeraudes, saphirs et rubis 
+                            illuminent les créations hivernales.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">8 Octobre 2024</span>
+                        </div>
+                        <a href="#" class="read-more">Lire la suite →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-didsss-3952988.jpg" alt="Savoir-faire Artisanal" class="blog-img">
+                        <div class="blog-category">Savoir-faire</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Dans les Secrets de l'Atelier</h3>
+                        <p class="blog-excerpt">
+                            Plongez au cœur de notre atelier parisien et découvrez les gestes ancestraux qui donnent vie 
+                            à nos créations d'exception.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">2 Octobre 2024</span>
+                        </div>
+                        <a href="#" class="read-more">Lire la suite →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-didsss-3953512.jpg" alt="Événement VIP" class="blog-img">
+                        <div class="blog-category">Événements</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Soirée Privée Place Vendôme</h3>
+                        <p class="blog-excerpt">
+                            Retour sur notre soirée exclusive du 25 septembre, où nos clients privilégiés ont découvert 
+                            en avant-première notre collection automne.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">28 Septembre 2024</span>
+                        </div>
+                        <a href="#" class="read-more">Lire la suite →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-paduret-5514711.jpg" alt="Guide Entretien" class="blog-img">
+                        <div class="blog-category">Conseils</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Guide d'Entretien de vos Bijoux</h3>
+                        <p class="blog-excerpt">
+                            Nos experts vous livrent leurs conseils pour préserver l'éclat et la beauté de vos bijoux 
+                            précieux au fil des années.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">20 Septembre 2024</span>
+                        </div>
+                        <a href="#" class="read-more">Lire la suite →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="assets/images/blog/ILLUSTRATION/pexels-tracehudson-2797752.jpg" alt="Histoire Maison" class="blog-img">
+                        <div class="blog-category">Histoire</div>
+                        <div class="blog-image-overlay"></div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>40 Ans d'Excellence Parisienne</h3>
+                        <p class="blog-excerpt">
+                            Retour sur quatre décennies de passion, d'innovation et d'excellence qui ont forgé 
+                            la réputation de Zaza A Paris.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">15 Septembre 2024</span>
+                        </div>
+                        <a href="#" class="read-more">Lire la suite →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="newsletter-section">
+                <div class="newsletter-content">
+                    <h3>Restez Informé</h3>
+                    <p>Recevez en exclusivité nos dernières actualités et nos invitations aux événements privés</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre adresse email" required>
+                        <button type="submit" class="cta-button">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Amélioré -->
+    <footer class="footer-enhanced">
+        <div class="footer-background">
+            <img src="assets/images/blog/ILLUSTRATION/pexels-diva-33035953.jpg" alt="Zaza A Paris" class="footer-bg-image">
+            <div class="footer-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="footer-content-enhanced">
+                <div class="footer-section-enhanced footer-brand">
+                    <h3 class="footer-logo">Zaza A Paris</h3>
+                    <p class="footer-tagline">L'art de la joaillerie parisienne depuis 1985</p>
+                    <p class="footer-description">Créateur de bijoux d'exception, nous perpétuons l'excellence de la haute joaillerie française avec passion et savoir-faire artisanal.</p>
+                    <div class="footer-certifications">
+                        <span class="certification-badge">Maître Artisan</span>
+                        <span class="certification-badge">Made in Paris</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collections.html#eternite">Collection Éternité</a></li>
+                        <li><a href="collections.html#lumiere">Collection Lumière</a></li>
+                        <li><a href="collections.html#modernite">Collection Modernité</a></li>
+                        <li><a href="collections.html">Toutes nos créations</a></li>
+                        <li><a href="collections.html#nouveautes">Nouveautés</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="contact.html#sur-mesure">Création sur mesure</a></li>
+                        <li><a href="contact.html#consultation">Consultation privée</a></li>
+                        <li><a href="contact.html#reparation">Réparation & entretien</a></li>
+                        <li><a href="contact.html#expertise">Expertise & estimation</a></li>
+                        <li><a href="contact.html#livraison">Livraison sécurisée</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section-enhanced">
+                    <h4>Contact & Boutique</h4>
+                    <div class="contact-info-enhanced">
+                        <p><span class="contact-icon">📍</span> 15 Place Vendôme, 75001 Paris</p>
+                        <p><span class="contact-icon">📞</span> +33 1 42 60 95 23</p>
+                        <p><span class="contact-icon">✉️</span> contact@zazaaparis.fr</p>
+                        <p><span class="contact-icon">🕒</span> Lun-Sam 10h-19h</p>
+                        <p><span class="contact-icon">🚇</span> Métro Opéra, Tuileries</p>
+                    </div>
+                    <div class="social-links-enhanced">
+                        <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                        <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+                        <a href="#" class="social-link" aria-label="Pinterest">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom-enhanced">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2024 Zaza A Paris. Tous droits réservés.</p>
+                        <p class="footer-subtitle">Bijouterie artisanale française</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#mentions-legales">Mentions légales</a>
+                        <a href="#confidentialite">Confidentialité</a>
+                        <a href="#cgv">CGV</a>
+                        <a href="#cookies">Cookies</a>
+                    </div>
+                    <div class="footer-payments">
+                        <span class="payment-text">Paiements sécurisés</span>
+                        <div class="payment-icons">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-icon">🔒</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cart-enhanced.js"></script>
+    <script>
+        // Initialisation du panier amélioré
+        document.addEventListener('DOMContentLoaded', function() {
+            window.enhancedCart = new EnhancedShoppingCart();
+        });
+    </script>
+</body>
+</html>

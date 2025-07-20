@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'Intégration des Médias - Zaza A Paris</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fefefe;
+        }
+        .guide-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            color: #1a1a1a;
+            font-family: 'Playfair Display', serif;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        h2 {
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        .before, .after {
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        .before {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+        }
+        .after {
+            background: #d1edff;
+            border: 1px solid #74b9ff;
+        }
+        .file-structure {
+            background: #f1f3f4;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-line;
+        }
+        .highlight {
+            background: #d4af37;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Guide d'Intégration des Médias</h1>
+    <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 3rem;">
+        Comment remplacer les placeholders par vos vraies photos et vidéos
+    </p>
+
+    <!-- Section Hero -->
+    <div class="guide-section">
+        <h2>1. Image Hero (Page d'accueil)</h2>
+        <p>Remplacez l'image principale de la section hero :</p>
+        
+        <div class="before-after">
+            <div class="before">
+                <h4>❌ Avant (Placeholder)</h4>
+                <div class="code-block">
+&lt;div class="hero-image"&gt;
+    &lt;div class="placeholder-image"&gt;Image Principale&lt;/div&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+            <div class="after">
+                <h4>✅ Après (Vraie image)</h4>
+                <div class="code-block">
+&lt;div class="hero-image"&gt;
+    &lt;img src="assets/images/hero/hero-main.jpg" 
+         alt="Bijoux d'exception Zaza A Paris"
+         loading="lazy"&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+        </div>
+        
+        <p><span class="highlight">Fichier à modifier :</span> index.html (ligne ~45)</p>
+        <p><span class="highlight">Image recommandée :</span> 1920x1080px, format JPG, &lt; 500KB</p>
+    </div>
+
+    <!-- Section Collections -->
+    <div class="guide-section">
+        <h2>2. Images des Collections</h2>
+        <p>Remplacez les images des 3 collections :</p>
+        
+        <div class="before-after">
+            <div class="before">
+                <h4>❌ Avant</h4>
+                <div class="code-block">
+&lt;div class="collection-image"&gt;
+    &lt;div class="placeholder-image"&gt;Collection Éternité&lt;/div&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+            <div class="after">
+                <h4>✅ Après</h4>
+                <div class="code-block">
+&lt;div class="collection-image"&gt;
+    &lt;img src="assets/images/collections/collection-eternite.jpg" 
+         alt="Collection Éternité - Bagues et alliances"
+         loading="lazy"&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+        </div>
+        
+        <p><span class="highlight">Fichiers nécessaires :</span></p>
+        <ul>
+            <li>assets/images/collections/collection-eternite.jpg</li>
+            <li>assets/images/collections/collection-lumiere.jpg</li>
+            <li>assets/images/collections/collection-elegance.jpg</li>
+        </ul>
+    </div>
+
+    <!-- Section Produits -->
+    <div class="guide-section">
+        <h2>3. Photos des Produits</h2>
+        <p>Remplacez les 4 produits mis en avant :</p>
+        
+        <div class="before-after">
+            <div class="before">
+                <h4>❌ Avant</h4>
+                <div class="code-block">
+&lt;div class="product-image"&gt;
+    &lt;div class="placeholder-image"&gt;Produit 1&lt;/div&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+            <div class="after">
+                <h4>✅ Après</h4>
+                <div class="code-block">
+&lt;div class="product-image"&gt;
+    &lt;img src="assets/images/products/bague-solitaire-diamant.jpg" 
+         alt="Bague Solitaire Diamant"
+         loading="lazy"&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+        </div>
+        
+        <p><span class="highlight">Format recommandé :</span> 600x600px (carré), JPG, &lt; 200KB</p>
+    </div>
+
+    <!-- Section Blog -->
+    <div class="guide-section">
+        <h2>4. Images du Blog</h2>
+        <p>Remplacez les images des articles de blog :</p>
+        
+        <div class="before-after">
+            <div class="before">
+                <h4>❌ Avant</h4>
+                <div class="code-block">
+&lt;div class="blog-image"&gt;
+    &lt;div class="placeholder-image"&gt;Collection Automne 2024&lt;/div&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+            <div class="after">
+                <h4>✅ Après</h4>
+                <div class="code-block">
+&lt;div class="blog-image"&gt;
+    &lt;img src="assets/images/blog/collection-automne-2024.jpg" 
+         alt="Collection Automne 2024"
+         loading="lazy"&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section About -->
+    <div class="guide-section">
+        <h2>5. Image de l'Atelier</h2>
+        <p>Ajoutez une photo de votre atelier parisien :</p>
+        
+        <div class="code-block">
+&lt;div class="about-image"&gt;
+    &lt;img src="assets/images/hero/atelier-joaillerie.jpg" 
+         alt="Atelier de joaillerie Zaza A Paris"
+         loading="lazy"&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- CSS Updates -->
+    <div class="guide-section">
+        <h2>6. Mise à jour du CSS</h2>
+        <p>Ajoutez ces styles dans <strong>styles.css</strong> pour optimiser l'affichage des images :</p>
+        
+        <div class="code-block">
+/* Styles pour les vraies images */
+.hero-image img,
+.collection-image img,
+.product-image img,
+.blog-image img,
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+/* Effet hover sur les images produits */
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* Effet hover sur les images collections */
+.collection-item:hover .collection-image img {
+    transform: scale(1.03);
+}
+
+/* Optimisation pour les écrans haute résolution */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+        </div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="guide-section">
+        <h2>✅ Checklist d'Intégration</h2>
+        <p>Suivez cette liste pour une intégration parfaite :</p>
+        
+        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+            <h4>📋 Étapes à suivre :</h4>
+            <ol style="line-height: 2;">
+                <li>📸 <strong>Préparez vos images</strong> selon les formats recommandés</li>
+                <li>📁 <strong>Placez les fichiers</strong> dans les bons dossiers assets/</li>
+                <li>🔧 <strong>Modifiez index.html</strong> pour remplacer les placeholders</li>
+                <li>🎨 <strong>Ajoutez les styles CSS</strong> pour les vraies images</li>
+                <li>🌐 <strong>Testez le site</strong> pour vérifier l'affichage</li>
+                <li>⚡ <strong>Optimisez les images</strong> si nécessaire (compression)</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Structure finale -->
+    <div class="guide-section">
+        <h2>📁 Structure Finale des Assets</h2>
+        <div class="file-structure">
+assets/
+├── README.md
+├── integration-guide.html
+├── images/
+│   ├── hero/
+│   │   ├── hero-main.jpg (Image principale)
+│   │   └── atelier-joaillerie.jpg (Section À propos)
+│   ├── collections/
+│   │   ├── collection-eternite.jpg
+│   │   ├── collection-lumiere.jpg
+│   │   └── collection-elegance.jpg
+│   ├── products/
+│   │   ├── bague-solitaire-diamant.jpg
+│   │   ├── collier-perles-akoya.jpg
+│   │   ├── bracelet-or-rose.jpg
+│   │   └── boucles-oreilles-emeraude.jpg
+│   └── blog/
+│       ├── collection-automne-2024.jpg
+│       ├── tendances-hiver.jpg
+│       ├── atelier-sertissage.jpg
+│       └── evenement-vendome.jpg
+└── videos/
+    └── presentations/
+        └── (vos vidéos de présentation)
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #1a1a1a; color: white; border-radius: 8px;">
+        <h3 style="color: #d4af37; margin-bottom: 1rem;">🎯 Résultat Final</h3>
+        <p>Une fois toutes les images intégrées, votre site Zaza A Paris aura un rendu professionnel et luxueux, parfaitement adapté à l'image de votre marque de bijoux d'exception.</p>
+    </div>
+</body>
+</html>
